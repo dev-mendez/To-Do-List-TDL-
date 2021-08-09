@@ -39,13 +39,16 @@ class App extends React.Component {
   };
 
   deleteTask = (id) => {
-    const newTasks = this.state.tasks.filter((task) => task.id !== id);
-    this.setState({
-      tasks: [...newTasks],
-    });
+    const procede = window.confirm('Are U sure ?');
+    if (procede) {
+      const newTasks = this.state.tasks.filter((task) => task.id !== id);
+      this.setState({
+        tasks: [...newTasks],
+      });
+    }
   };
 
-  editTask = (id) => {
+  taskComplete = (id) => {
     console.log(id);
   };
 
@@ -56,7 +59,10 @@ class App extends React.Component {
         <Container
           className="mt-4 rounded"
           fluid="md"
-          style={{ backgroundColor: '#ccc' }}
+          style={{
+            height: '85vh',
+            backgroundColor: '#ccc',
+          }}
         >
           <Row>
             <Col md={4}>
@@ -68,16 +74,24 @@ class App extends React.Component {
               />
             </Col>
             <Col>
-              <Container className="p-3">
-                <h1 className="text-white">To Do List</h1>
-                <hr className="text-white"></hr>
+              <h1 className="text-white mt-3">To Do List</h1>
+              <hr className="text-white"></hr>
+              <Container
+                className="rounded"
+                style={{
+                  backgroundColor: '#ccb',
+                  boxShadow: 'inset 1px 1px 11px 0px rgba(50, 46, 50, 0.55)',
+                  height: '65vh',
+                  overflowY: ' scroll',
+                }}
+              >
                 {this.state.tasks.map((e) => (
                   <List
                     task={e.task}
                     description={e.description}
                     id={e.id}
                     clickToDelete={this.deleteTask.bind(this, e.id)}
-                    clickToEdit={this.editTask.bind(this, e.id)}
+                    clickToComplete={this.taskComplete.bind(this, e.id)}
                   />
                 ))}
               </Container>

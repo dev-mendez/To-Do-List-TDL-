@@ -9,7 +9,7 @@ const List = (props) => {
         task={props.task}
         description={props.description}
         clickToDelete={props.clickToDelete}
-        clickToEdit={props.clickToEdit}
+        clickToComplete={props.clickToComplete}
       ></Task>
     </div>
   );
