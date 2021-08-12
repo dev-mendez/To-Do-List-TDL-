@@ -15,29 +15,30 @@ class App extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.addTask(this.state.task, this.state.description);
+    this.addTask(this.state.task, this.state.description, this.state.range);
   };
 
+  //Setting initial state for new tasks
   onChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     });
   };
 
-  addTask = (task, description) => {
+  addTask = (task, description, range) => {
     const newTask = {
       task: task,
       description: description,
+      time: range || 12,
       id: this.state.tasks.length,
     };
 
     this.setState({
-      tasks: [newTask, ...this.state.tasks],
+      tasks: [...this.state.tasks, newTask],
     });
-
-    console.log(newTask);
   };
 
+  //Delete task method
   deleteTask = (id) => {
     const procede = window.confirm('Are U sure ?');
     if (procede) {
@@ -48,8 +49,19 @@ class App extends React.Component {
     }
   };
 
+  //Complete task method
   taskComplete = (id) => {
-    console.log(id);
+    const modifyTask = this.state.tasks.map((task) => {
+      if (task.id === id) {
+        task.done = !task.done;
+        return task;
+      } else {
+        return task;
+      }
+    });
+    this.setState({
+      tasks: modifyTask,
+    });
   };
 
   render() {
@@ -89,6 +101,8 @@ class App extends React.Component {
                   <List
                     task={e.task}
                     description={e.description}
+                    time={e.time}
+                    done={e.done}
                     id={e.id}
                     clickToDelete={this.deleteTask.bind(this, e.id)}
                     clickToComplete={this.taskComplete.bind(this, e.id)}

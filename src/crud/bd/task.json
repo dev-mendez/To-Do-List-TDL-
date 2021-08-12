@@ -2,11 +2,17 @@
   {
     "task": "Task One",
     "description": "Task One",
+    "dayTime": 24,
+    "time": 0,
+    "done": false,
     "id": 0
   },
   {
     "task": "Task Two",
     "description": "Task Two",
+    "dayTime": 24,
+    "time": 5,
+    "done": false,
     "id": 1
   }
 ]
